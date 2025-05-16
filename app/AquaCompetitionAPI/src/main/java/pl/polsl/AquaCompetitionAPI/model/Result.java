@@ -2,7 +2,6 @@ package pl.polsl.AquaCompetitionAPI.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import java.sql.Time;
 
 @Entity
 @Data
@@ -19,9 +18,15 @@ public class Result {
     @JoinColumn(name = "race_id")
     private Race race;
     
-    private Time time;
+    private long time;
+
     private int lane;
     private int finalPosition;
     private boolean disqualified;
+    
+	public boolean isDiscqualified() { return disqualified; }
+//	public int getFinalPosition() { return finalPosition; }
+//	public long getTime() { return time; }
+//	public Competitor getCompetitor() {	return competitor; }
 }
 
