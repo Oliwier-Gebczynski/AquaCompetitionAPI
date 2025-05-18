@@ -18,15 +18,13 @@ public class Result {
     @JoinColumn(name = "race_id")
     private Race race;
     
-    private long time;
+    private String time;
 
     private int lane;
     private int finalPosition;
     private boolean disqualified;
     
-	public boolean isDiscqualified() { return disqualified; }
-//	public int getFinalPosition() { return finalPosition; }
-//	public long getTime() { return time; }
-//	public Competitor getCompetitor() {	return competitor; }
+    public boolean isDisqualified() { 
+        return disqualified; 
+    }
 }
-

@@ -135,12 +135,12 @@ public class CompetitionSystemController {
         return resultService.getResultsByRace(raceId);
     }
 
-    @PostMapping("/results")
+    @PostMapping(value = "/results", consumes = "application/json")
     public Result createResult(@RequestBody Result result) {
         return resultService.saveResult(result);
     }
 
-    @PutMapping("/results/{id}")
+    @PutMapping(value = "/results/{id}", consumes = "application/json")
     public Result updateResult(@PathVariable Long id, @RequestBody Result result) {
         result.setId(id);
         return resultService.saveResult(result);
