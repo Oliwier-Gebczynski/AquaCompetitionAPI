@@ -3,6 +3,7 @@ package pl.polsl.AquaCompetitionAPI.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import pl.polsl.AquaCompetitionAPI.model.Competition;
 import pl.polsl.AquaCompetitionAPI.model.Competitor;
@@ -20,17 +21,30 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CompetitionSystemController {
 
-    private final CompetitorService competitorService;
-    private final CompetitionService competitionService;
-    private final RaceService raceService;
-    private final ResultService resultService;
-
-    // Competitors
-    @GetMapping("/competitors")
-    public List<Competitor> getAllCompetitors() {
-        return competitorService.getAllCompetitors();
+	private final CompetitorService competitorService;
+	private final CompetitionService competitionService;
+	private final RaceService raceService;
+	private final ResultService resultService;
+	
+	@Autowired
+    public CompetitionSystemController(
+            CompetitorService competitorService,
+            CompetitionService competitionService,
+            RaceService raceService,
+            ResultService resultService
+    ) {
+        this.competitorService = competitorService;
+        this.competitionService = competitionService;
+        this.raceService = raceService;
+        this.resultService = resultService;
     }
 
+    // Competitors
+	@GetMapping("/competitors")
+	public List<Competitor> getAllCompetitors() {
+	    List<Competitor> list = competitorService.getAllCompetitors();
+	    return list;
+	}
     @GetMapping("/competitors/{id}")
     public Competitor getCompetitor(@PathVariable Long id) {
         return competitorService.getCompetitorById(id);
@@ -63,6 +77,11 @@ public class CompetitionSystemController {
     public Competition getCompetition(@PathVariable Long id) {
         return competitionService.getCompetitionById(id);
     }
+    
+    @GetMapping("/competitions/{competitionId}/races")
+    public List<Race> getRacesForCompetition(@PathVariable Long competitionId) {
+    	return raceService.getRacesByCompetition(competitionId);
+    }
 
     @PostMapping("/competitions")
     public Competition createCompetition(@RequestBody Competition comp) {
@@ -73,6 +92,11 @@ public class CompetitionSystemController {
     public Competition updateCompetition(@PathVariable Long id, @RequestBody Competition comp) {
         comp.setId(id);
         return competitionService.saveCompetition(comp);
+    }
+    
+    @PostMapping("/competitions/{competitionId}/races")
+    public Race createRaceForCompetition(@PathVariable Long competitionId, @RequestBody Race race) {
+        return raceService.createRaceForCompetition(competitionService.getCompetitionById(competitionId), race);
     }
 
     @DeleteMapping("/competitions/{id}")
@@ -102,6 +126,10 @@ public class CompetitionSystemController {
         return raceService.saveRace(race);
     }
 
+    @PostMapping("/races/{id}/results")
+    public Result createResultForRace(@PathVariable Long id, @RequestBody Result result) {
+    	return resultService.createResultForRace(raceService.getRaceById(id), result);
+    }
     @PutMapping("/races/{id}")
     public Race updateRace(@PathVariable Long id, @RequestBody Race race) {
         race.setId(id);

@@ -47,6 +47,11 @@ public class ResultService {
         resultRepository.deleteById(id);
     }
     
+    public Result createResultForRace(Race race, Result result) {
+    	result.setRace(race);
+    	return resultRepository.save(result);
+    }
+    
     // Custom business logic methods
     
     public Competitor getRaceWinner(Long raceId) {

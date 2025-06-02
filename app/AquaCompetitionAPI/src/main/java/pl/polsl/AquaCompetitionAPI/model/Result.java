@@ -2,10 +2,12 @@ package pl.polsl.AquaCompetitionAPI.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Setter;
 
 @Entity
 @Data
 public class Result {
+	@Setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

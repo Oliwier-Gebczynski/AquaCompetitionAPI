@@ -1,0 +1,294 @@
+{
+	"info": {
+		"_postman_id": "c91332fa-a704-476c-b401-b9ed2480ca35",
+		"name": "AquaCompetitionAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43355676"
+	},
+	"item": [
+		{
+			"name": "Creating New Competition",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Summer Swimming Championship 2025\",\r\n  \"startDate\": \"2025-07-15\",\r\n  \"endDate\": \"2025-07-20\",\r\n  \"location\": \"Municipal Olympic Pool\",\r\n  \"organizer\": \"City Swimming Association\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/competitions",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"competitions"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Summer Swimming Championship 2025",
+							"disabled": true
+						},
+						{
+							"key": "startDate",
+							"value": "2025-07-15",
+							"disabled": true
+						},
+						{
+							"key": "endDate",
+							"value": "2025-07-20",
+							"disabled": true
+						},
+						{
+							"key": "location",
+							"value": "Municipal Olympic Pool",
+							"disabled": true
+						},
+						{
+							"key": "organizer",
+							"value": "City Swimming Association",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Viewing Competition Details",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/competitions",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"competitions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Updating Competition Information",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"startDate\": \"2025-07-18\",\r\n  \"endDate\": \"2025-07-23\",\r\n  \"location\": \"National Olympic Center\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/competitions/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"competitions",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Creating a new race for competition",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"style\": \"sra\",\r\n  \"distance\": 200,\r\n  \"category\": \"Senior\",\r\n  \"gender\": \"Female\",\r\n  \"dateTime\": \"2025-07-16T14:30:00\",\r\n  \"competitionId\": \"123e4567-e89b-12d3-a456-426614174000\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/competitions/1/races",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"competitions",
+						"1",
+						"races"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Viewing all races in competition",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/competitions/1/races",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"competitions",
+						"1",
+						"races"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Updating Race information",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"dateTime\": \"2025-07-16T16:00:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/races/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"races",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Creating new Competitior",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"firstName\": \"Sarah\",\r\n  \"lastName\": \"Johnson\",\r\n  \"dateOfBirth\": \"1997-09-23\",\r\n  \"gender\": \"Female\",\r\n  \"club\": \"Dolphin Swimmers\",\r\n  \"category\": \"Senior\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/competitors",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"competitors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Viewing competitior details",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/competitors/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"competitors",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Updating Competitor Information",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"club\": \"Elite Swimmers\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/competitors/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"competitors",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,12 +1,16 @@
 package pl.polsl.AquaCompetitionAPI.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import java.util.Date;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
-@Data
+@Getter
+@Setter
 public class Competition {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,10 +28,7 @@ public class Competition {
     private String organizer;
     
     @OneToMany(mappedBy = "competition")
+    @JsonManagedReference
     private Set<Race> races;
 
-	public void setId(Long id2) {
-		// TODO Auto-generated method stub
-		
-	}
 }
