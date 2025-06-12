@@ -26,20 +26,7 @@ public class CompetitionSystemController {
 	private final RaceService raceService;
 	private final ResultService resultService;
 	
-	@Autowired
-    public CompetitionSystemController(
-            CompetitorService competitorService,
-            CompetitionService competitionService,
-            RaceService raceService,
-            ResultService resultService
-    ) {
-        this.competitorService = competitorService;
-        this.competitionService = competitionService;
-        this.raceService = raceService;
-        this.resultService = resultService;
-    }
-
-    // Competitors
+	// Competitors
 	@GetMapping("/competitors")
 	public List<Competitor> getAllCompetitors() {
 	    List<Competitor> list = competitorService.getAllCompetitors();

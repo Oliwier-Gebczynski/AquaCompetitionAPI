@@ -48,11 +48,9 @@ public class ResultService {
     }
     
     public Result createResultForRace(Race race, Result result) {
-    	result.setRace(race);
-    	return resultRepository.save(result);
+        result.setRace(race);
+        return resultRepository.save(result);
     }
-    
-    // Custom business logic methods
     
     public Competitor getRaceWinner(Long raceId) {
         List<Result> raceResults = resultRepository.findByRaceId(raceId);
@@ -61,20 +59,16 @@ public class ResultService {
             throw new RuntimeException("No results found for race with id " + raceId);
         }
 
-        Result bestResult = null;
-        for (Result r : raceResults) {
-            if (r.isDiscqualified()) {
-                continue;
-            }
-            if (bestResult == null || r.getTime() < bestResult.getTime()) {
-                bestResult = r;
-            }
-        }
+        Result bestResult = raceResults.stream()
+                .filter(r -> !r.isDisqualified())
+                .min(Comparator.comparingInt(Result::getFinalPosition))
+                .orElseThrow(() -> new RuntimeException("No valid (non-disqualified) results found for race with id " + raceId));
 
-        if (bestResult == null) {
-            throw new RuntimeException("No valid results found for race with id " + raceId);
+        Competitor winner = bestResult.getCompetitor();
+        if (winner == null) {
+            throw new RuntimeException("Winner result has no competitor, result id " + bestResult.getId());
         }
-        return bestResult.getCompetitor();
+        return winner;
     }
     
     public List<Competitor> getCompetitionMedallists(Long competitionId) {
@@ -88,7 +82,6 @@ public class ResultService {
                     .sorted(Comparator.comparingInt(Result::getFinalPosition))
                     .collect(Collectors.toList());
             
-            // Get top 3 competitors (medallists) from each race
             raceResults.stream()
                     .limit(3)
                     .map(Result::getCompetitor)
