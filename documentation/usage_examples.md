@@ -4,7 +4,7 @@ These examples demonstrate the typical usage flow of the competition management 
 
 ## 1. Competition Management
 
-### 1.1 Creating a New Competition
+### 1.1 Creating a New Competition ✅
 
 **Use Case**: An organizer wants to create a new competition.
 
@@ -22,13 +22,13 @@ These examples demonstrate the typical usage flow of the competition management 
 
 **Expected Endpoint**: `POST /api/competitions`
 
-### 1.2 Viewing Competition Details
+### 1.2 Viewing Competition Details ✅
 
 **Use Case**: A user wants to see detailed information about a specific competition.
 
 **Expected Endpoint**: `GET /api/competitions/{competitionId}`
 
-### 1.3 Updating Competition Information
+### 1.3 Updating Competition Information ✅
 
 **Use Case**: An organizer needs to change the details of a competition.
 
@@ -46,7 +46,7 @@ These examples demonstrate the typical usage flow of the competition management 
 
 ## 2. Race Management
 
-### 2.1 Creating a New Race
+### 2.1 Creating a New Race ✅
 
 **Use Case**: An organizer wants to add a new race to a competition.
 
@@ -65,13 +65,13 @@ These examples demonstrate the typical usage flow of the competition management 
 
 **Expected Endpoint**: `POST /api/competitions/{competitionId}/races`
 
-### 2.2 Viewing All Races in a Competition
+### 2.2 Viewing All Races in a Competition ✅
 
 **Use Case**: A user wants to list all races scheduled for a competition.
 
 **Expected Endpoint**: `GET /api/competitions/{competitionId}/races`
 
-### 2.3 Updating Race Information
+### 2.3 Updating Race Information ✅
 
 **Use Case**: An organizer needs to change the time or details of a race.
 
@@ -87,7 +87,7 @@ These examples demonstrate the typical usage flow of the competition management 
 
 ## 3. Competitor Management
 
-### 3.1 Registering a New Competitor
+### 3.1 Registering a New Competitor ✅
 
 **Use Case**: A competitor wants to register in the system.
 
@@ -106,13 +106,13 @@ These examples demonstrate the typical usage flow of the competition management 
 
 **Expected Endpoint**: `POST /api/competitors`
 
-### 3.2 Viewing Competitor Details
+### 3.2 Viewing Competitor Details ✅
 
 **Use Case**: A user wants to see detailed information about a competitor.
 
 **Expected Endpoint**: `GET /api/competitors/{competitorId}`
 
-### 3.3 Updating Competitor Information
+### 3.3 Updating Competitor Information ✅
 
 **Use Case**: A competitor needs to update their personal data.
 
@@ -128,7 +128,7 @@ These examples demonstrate the typical usage flow of the competition management 
 
 ## 4. Result Management
 
-### 4.1 Recording a Race Result
+### 4.1 Recording a Race Result ✅
 
 **Use Case**: After a race, an official needs to record a competitor's result.
 
@@ -143,13 +143,13 @@ These examples demonstrate the typical usage flow of the competition management 
 
 **Expected Endpoint**: `POST /api/races/{raceId}/results`
 
-### 4.2 Viewing Results for a Race
+### 4.2 Viewing Results for a Race ✅
 
 **Use Case**: A user wants to see all results from a specific race.
 
 **Expected Endpoint**: `GET /api/races/{raceId}/results`
 
-### 4.3 Viewing Results for a Competitor
+### 4.3 Viewing Results for a Competitor ✅
 
 **Use Case**: A user wants to see all results achieved by a competitor.
 
@@ -157,19 +157,19 @@ These examples demonstrate the typical usage flow of the competition management 
 
 ## 5. Advanced Features
 
-### 5.1 Race Standings
+### 5.1 Race Standings ❌
 
 **Use Case**: A user wants to view the current standings for a race.
 
 **Expected Endpoint**: `GET /api/races/{raceId}/standings`
 
-### 5.2 Competition Medal Table
+### 5.2 Competition Medal Table ❌
 
 **Use Case**: A user wants to view the medal table for a competition.
 
 **Expected Endpoint**: `GET /api/competitions/{competitionId}/medal-table`
 
-### 5.3 Personal Best Times
+### 5.3 Personal Best Times ❌
 
 **Use Case**: A competitor wants to see their personal best times.
 
