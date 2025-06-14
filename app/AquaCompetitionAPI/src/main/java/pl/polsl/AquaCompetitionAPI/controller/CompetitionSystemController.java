@@ -13,6 +13,7 @@ import pl.polsl.AquaCompetitionAPI.service.CompetitionService;
 import pl.polsl.AquaCompetitionAPI.service.CompetitorService;
 import pl.polsl.AquaCompetitionAPI.service.RaceService;
 import pl.polsl.AquaCompetitionAPI.service.ResultService;
+import pl.polsl.AquaCompetitionAPI.dto.*;
 
 import java.util.List;
 
@@ -127,6 +128,11 @@ public class CompetitionSystemController {
     public ResponseEntity<Void> deleteRace(@PathVariable Long id) {
         raceService.deleteRace(id);
         return ResponseEntity.noContent().build();
+    }
+    
+    @GetMapping("/races/{raceId}/standings")
+    public List<StandingDto> getRaceStandings(@PathVariable Long raceId) {
+        return resultService.getRaceStandings(raceId);
     }
 
     // Results

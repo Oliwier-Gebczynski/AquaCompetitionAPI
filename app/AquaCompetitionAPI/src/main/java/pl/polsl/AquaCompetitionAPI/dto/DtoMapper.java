@@ -86,4 +86,25 @@ public class DtoMapper {
         
         return dto;
     }
+    
+    public static StandingDto toStandingDto(Result result, int position) {
+        if (result == null) return null;
+        
+        StandingDto dto = new StandingDto();
+        dto.setPosition(position);
+        dto.setCompetitor(toCompetitorDto(result.getCompetitor()));
+        dto.setTime(result.getTime());
+        dto.setLane(result.getLane());
+        dto.setDisqualified(result.isDisqualified());
+        
+        if (result.isDisqualified()) {
+            dto.setStatus("DISQUALIFIED");
+        } else if (result.getTime() != null && !result.getTime().trim().isEmpty()) {
+            dto.setStatus("FINISHED");
+        } else {
+            dto.setStatus("DNS"); 
+        }
+        
+        return dto;
+    }
 }

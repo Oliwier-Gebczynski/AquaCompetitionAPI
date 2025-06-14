@@ -7,6 +7,7 @@ import pl.polsl.AquaCompetitionAPI.model.Competitor;
 import pl.polsl.AquaCompetitionAPI.model.Race;
 import pl.polsl.AquaCompetitionAPI.model.Result;
 import pl.polsl.AquaCompetitionAPI.repository.ResultRepository;
+import pl.polsl.AquaCompetitionAPI.dto.*;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -89,5 +90,48 @@ public class ResultService {
         }
         
         return medallists;
+    }
+    
+    public List<StandingDto> getRaceStandings(Long raceId) {
+        List<Result> raceResults = resultRepository.findByRaceId(raceId);
+        
+        if (raceResults.isEmpty()) {
+            return new ArrayList<>();
+        }
+        
+        List<Result> sortedResults = raceResults.stream()
+                .sorted((r1, r2) -> {
+                    if (r1.isDisqualified() && !r2.isDisqualified()) return 1;
+                    if (!r1.isDisqualified() && r2.isDisqualified()) return -1;
+                    
+                    if (r1.isDisqualified() && r2.isDisqualified()) {
+                        return Integer.compare(r1.getLane(), r2.getLane());
+                    }
+                    
+                    if (r1.getFinalPosition() > 0 && r2.getFinalPosition() > 0) {
+                        return Integer.compare(r1.getFinalPosition(), r2.getFinalPosition());
+                    }
+                    
+                    if (r1.getTime() != null && r2.getTime() != null) {
+                        return r1.getTime().compareTo(r2.getTime());
+                    }
+                    
+                    return Integer.compare(r1.getLane(), r2.getLane());
+                })
+                .collect(Collectors.toList());
+        
+        List<StandingDto> standings = new ArrayList<>();
+        int position = 1;
+        
+        for (Result result : sortedResults) {
+            if (result.isDisqualified()) {
+                standings.add(DtoMapper.toStandingDto(result, -1)); // -1 for disqualified
+            } else {
+                standings.add(DtoMapper.toStandingDto(result, position));
+                position++;
+            }
+        }
+        
+        return standings;
     }
 }

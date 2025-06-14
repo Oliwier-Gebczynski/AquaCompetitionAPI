@@ -157,7 +157,7 @@ These examples demonstrate the typical usage flow of the competition management 
 
 ## 5. Advanced Features
 
-### 5.1 Race Standings ❌
+### 5.1 Race Standings ✅
 
 **Use Case**: A user wants to view the current standings for a race.
 
