@@ -128,7 +128,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"style\": \"sra\",\r\n  \"distance\": 200,\r\n  \"category\": \"Senior\",\r\n  \"gender\": \"Female\",\r\n  \"dateTime\": \"2025-07-16T14:30:00\",\r\n  \"competitionId\": \"123e4567-e89b-12d3-a456-426614174000\"\r\n}",
+					"raw": "{\r\n  \"style\": \"3evyb\",\r\n  \"distance\": 200,\r\n  \"category\": \"Junior\",\r\n  \"gender\": \"Male\",\r\n  \"dateTime\": \"2025-07-16T14:30:00\",\r\n  \"competitionId\": \"123e4567-e89b-12d3-a456-426614174000\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -220,7 +220,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"firstName\": \"Sarah\",\r\n  \"lastName\": \"Johnson\",\r\n  \"dateOfBirth\": \"1997-09-23\",\r\n  \"gender\": \"Female\",\r\n  \"club\": \"Dolphin Swimmers\",\r\n  \"category\": \"Senior\"\r\n}",
+					"raw": "{\r\n  \"firstName\": \"Merry\",\r\n  \"lastName\": \"Anna\",\r\n  \"dateOfBirth\": \"1997-01-03\",\r\n  \"gender\": \"Female\",\r\n  \"club\": \"Dolphin Swimmers\",\r\n  \"category\": \"Senior\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -285,6 +285,165 @@
 						"api",
 						"competitors",
 						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Recording a race result",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"competitorId\": \"2\",\r\n  \"time\": \"00:01:15.430\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/races/1/results",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"races",
+						"1",
+						"results"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Viewing race results",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"competitorId\": \"1\",\r\n  \"time\": \"00:02:15.430\"\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/api/races/1/results",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"races",
+						"1",
+						"results"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Viewing medal table of competition",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/competitions/1/medal-table",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"competitions",
+						"1",
+						"medal-table"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Viewing race standings",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"competitorId\": \"1\",\r\n  \"time\": \"00:02:15.430\"\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/api/races/1/standings",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"races",
+						"1",
+						"standings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Viewing competitor personal best",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"competitorId\": \"1\",\r\n  \"time\": \"00:02:15.430\"\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/api/competitors/2/personal-bests",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"competitors",
+						"2",
+						"personal-bests"
 					]
 				}
 			},

@@ -37,6 +37,11 @@ public class CompetitionSystemController {
     public Competitor getCompetitor(@PathVariable Long id) {
         return competitorService.getCompetitorById(id);
     }
+    
+    @GetMapping("/competitors/{competitorId}/personal-bests")
+    public List<PersonalBestDto> getPersonalBests(@PathVariable Long competitorId) {
+        return competitorService.getPersonalBests(competitorId);
+    }
 
     @PostMapping("/competitors")
     public Competitor createCompetitor(@RequestBody Competitor c) {
