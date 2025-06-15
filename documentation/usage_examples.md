@@ -169,7 +169,7 @@ These examples demonstrate the typical usage flow of the competition management 
 
 **Expected Endpoint**: `GET /api/competitions/{competitionId}/medal-table`
 
-### 5.3 Personal Best Times ❌
+### 5.3 Personal Best Times ✅
 
 **Use Case**: A competitor wants to see their personal best times.
 
