@@ -13,9 +13,26 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class ResultService {
+	
+	private static class MedalCount {
+	    final Competitor competitor;
+	    int gold;
+	    int silver;
+	    int bronze;
+	    
+	    MedalCount(Competitor competitor, int gold, int silver, int bronze) {
+	        this.competitor = competitor;
+	        this.gold = gold;
+	        this.silver = silver;
+	        this.bronze = bronze;
+	    }
+	}
+
     
     @Autowired
     private ResultRepository resultRepository;
@@ -133,5 +150,52 @@ public class ResultService {
         }
         
         return standings;
+    }
+    
+    public List<MedalTableDto> getCompetitionMedalTable(Long competitionId) {
+        List<Race> races = raceService.getRacesByCompetition(competitionId);
+        Map<Long, MedalCount> medalCounts = new HashMap<>();
+        
+        for (Race race : races) {
+            List<Result> raceResults = resultRepository.findByRaceId(race.getId()).stream()
+                    .filter(r -> !r.isDisqualified())
+                    .sorted(Comparator.comparingInt(Result::getFinalPosition))
+                    .collect(Collectors.toList());
+            
+            // Award medals for top 3 positions
+            for (int i = 0; i < Math.min(3, raceResults.size()); i++) {
+                Result result = raceResults.get(i);
+                Competitor competitor = result.getCompetitor();
+                
+                if (competitor != null) {
+                    Long competitorId = competitor.getId();
+                    MedalCount count = medalCounts.computeIfAbsent(competitorId, 
+                        k -> new MedalCount(competitor, 0, 0, 0));
+                    
+                    switch (i) {
+                        case 0: count.gold++; break;
+                        case 1: count.silver++; break;
+                        case 2: count.bronze++; break;
+                    }
+                }
+            }
+        }
+        
+        return medalCounts.values().stream()
+                .filter(mc -> mc.gold > 0 || mc.silver > 0 || mc.bronze > 0)
+                .map(mc -> new MedalTableDto(
+                    DtoMapper.toCompetitorDto(mc.competitor),
+                    mc.gold, mc.silver, mc.bronze))
+                .sorted((m1, m2) -> {
+                    // Sort by gold medals first, then silver, then bronze
+                    int goldCompare = Integer.compare(m2.getGoldMedals(), m1.getGoldMedals());
+                    if (goldCompare != 0) return goldCompare;
+                    
+                    int silverCompare = Integer.compare(m2.getSilverMedals(), m1.getSilverMedals());
+                    if (silverCompare != 0) return silverCompare;
+                    
+                    return Integer.compare(m2.getBronzeMedals(), m1.getBronzeMedals());
+                })
+                .collect(Collectors.toList());
     }
 }

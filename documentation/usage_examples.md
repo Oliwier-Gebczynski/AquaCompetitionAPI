@@ -163,7 +163,7 @@ These examples demonstrate the typical usage flow of the competition management 
 
 **Expected Endpoint**: `GET /api/races/{raceId}/standings`
 
-### 5.2 Competition Medal Table ❌
+### 5.2 Competition Medal Table ✅
 
 **Use Case**: A user wants to view the medal table for a competition.
 

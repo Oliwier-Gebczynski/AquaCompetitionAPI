@@ -70,6 +70,11 @@ public class CompetitionSystemController {
     public List<Race> getRacesForCompetition(@PathVariable Long competitionId) {
     	return raceService.getRacesByCompetition(competitionId);
     }
+    
+    @GetMapping("/competitions/{competitionId}/medal-table")
+    public List<MedalTableDto> getCompetitionMedalTable(@PathVariable Long competitionId) {
+        return resultService.getCompetitionMedalTable(competitionId);
+    }
 
     @PostMapping("/competitions")
     public Competition createCompetition(@RequestBody Competition comp) {
@@ -118,6 +123,12 @@ public class CompetitionSystemController {
     public Result createResultForRace(@PathVariable Long id, @RequestBody Result result) {
     	return resultService.createResultForRace(raceService.getRaceById(id), result);
     }
+    
+    @GetMapping("/races/{id}/results")
+    public List<Result> getResultForRace(@PathVariable Long id) {
+    	return resultService.getResultsByRace(id);
+    }
+    
     @PutMapping("/races/{id}")
     public Race updateRace(@PathVariable Long id, @RequestBody Race race) {
         race.setId(id);
@@ -177,7 +188,7 @@ public class CompetitionSystemController {
     public Competitor getWinner(@PathVariable Long raceId) {
         return resultService.getRaceWinner(raceId);
     }
-
+    
     @GetMapping("/results/medallists/{competitionId}")
     public List<Competitor> getMedallists(@PathVariable Long competitionId) {
         return resultService.getCompetitionMedallists(competitionId);
